@@ -87,4 +87,26 @@ public class CustomerServiceTest extends TestCase {
         //then
         assertEquals(customerDTO.getId(), savedCustomerDTO.getId());
     }
+
+    public void testSaveCustomerByDTO() {
+
+        //given
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setId(ID);
+        customerDTO.setFirstname(FIRSTNAME);
+
+        Customer customer = new Customer();
+        customer.setId(ID);
+        customer.setFirstname(FIRSTNAME);
+
+        when(customerRepository.save(any(Customer.class))).thenReturn(customer);
+
+        //when
+        CustomerDTO savedCustomerDTO = customerService.saveCustomerByDTO(ID, customerDTO);
+
+        //then
+        assertEquals(Long.valueOf(ID), savedCustomerDTO.getId());
+        assertEquals(FIRSTNAME, savedCustomerDTO.getFirstname());
+
+    }
 }
