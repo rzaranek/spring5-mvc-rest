@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by robertZ on 2023-08-10.
  */
-public class CustomerServiceImplTest extends TestCase {
+public class CustomerServiceTest extends TestCase {
 
     public static final long ID = 632L;
     public static final String FIRSTNAME = "Baby";
@@ -107,6 +107,14 @@ public class CustomerServiceImplTest extends TestCase {
         //then
         assertEquals(Long.valueOf(ID), savedCustomerDTO.getId());
         assertEquals(FIRSTNAME, savedCustomerDTO.getFirstname());
+
+    }
+
+    public void testDeleteCustomer() {
+
+        customerService.deleteCustomerById(ID);
+
+        verify(customerRepository, times(1)).deleteById(anyLong());
 
     }
 }
