@@ -10,8 +10,8 @@ import javax.persistence.Id;
 /**
  * Created by robertZ on 2023-08-10.
  */
-@Data
 @Entity
+@Data
 public class Customer {
 
     @Id
@@ -19,5 +19,4 @@ public class Customer {
     private Long id;
     private String firstname;
     private String lastname;
-    private String customer_url;
 }

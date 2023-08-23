@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by robertZ on 2023-08-10.
  */
-public class CustomerServiceTest extends TestCase {
+public class CustomerServiceImplTest extends TestCase {
 
     public static final long ID = 632L;
     public static final String FIRSTNAME = "Baby";
