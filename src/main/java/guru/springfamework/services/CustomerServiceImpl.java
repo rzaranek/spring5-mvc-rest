@@ -2,6 +2,7 @@ package guru.springfamework.services;
 
 import guru.springfamework.api.v1.mapper.CustomerMapper;
 import guru.springfamework.api.v1.model.CustomerDTO;
+import guru.springfamework.controllers.v1.CustomerController;
 import guru.springfamework.domain.Customer;
 import guru.springfamework.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO getCustomerById(Long id) {
 
-        return customerMapper.customerToCustomerDTO(customerRepository.findById(id).get());
+//        return customerMapper.customerToCustomerDTO(customerRepository.findById(id).get());
+
+        return customerRepository.findById(id)
+                .map(customerMapper::customerToCustomerDTO)
+                .orElseThrow(ResourceNotFoundException::new);
 
     }
 
@@ -43,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
         CustomerDTO customerDTO =
                 customerMapper.customerToCustomerDTO(customerRepository.save(customer));
 
-        customerDTO.setCustomer_url("/api/v1/customer/" + customer.getId());
+        customerDTO.setCustomer_url(getCustomerUrl(customer.getId()));
 
         return customerDTO;
     }
@@ -75,7 +80,7 @@ public class CustomerServiceImpl implements CustomerService {
                 customer.setLastname(customerDTO.getLastname());
             }
             return customerMapper.customerToCustomerDTO(customerRepository.save(customer));
-        }).orElseThrow(RuntimeException::new);
+        }).orElseThrow(ResourceNotFoundException::new);
 
     }
 
@@ -83,5 +88,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteCustomerById(Long id) {
 
         customerRepository.deleteById(id);
+    }
+
+    public String getCustomerUrl(Long id) {
+        return CustomerController.BASE_URL + "/" + id;
     }
 }

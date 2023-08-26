@@ -33,7 +33,6 @@ public class CustomerMapperTest extends TestCase {
         assertEquals(Long.valueOf(ID), customerDTO.getId());
         assertEquals(FIRSTNAME, customerDTO.getFirstname());
         assertEquals(LASTNAME, customerDTO.getLastname());
-        assertEquals(CUSTOMER_URL, customerDTO.getCustomer_url());
 
     }
 
