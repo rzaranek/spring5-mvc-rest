@@ -1,6 +1,7 @@
 package guru.springfamework.api.v1.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,9 @@ public class VendorDTO {
     public static final String BASE_URL = "/api/v1/vendors/";
 
     Long id;
+    @ApiModelProperty(value = "vendor's name", required = true)
     String name;
+    @ApiModelProperty(value = "vendor's url", readOnly = true)
     @JsonProperty("vendor_url")
     String self_link;
 
